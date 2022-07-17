@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.homeoffice.registroescolar.models.Professor;
+import br.com.homeoffice.registroescolar.models.StatusProfessor;
 import br.com.homeoffice.registroescolar.repositories.ProfessorRepository;
 
 @Controller
@@ -30,4 +31,14 @@ public class ProfessorController {
 		return mv;
 	}
 
+	@GetMapping("/professor/new")
+	public ModelAndView novo() {
+		
+		ModelAndView mv = new ModelAndView("professores/new");
+		
+		mv.addObject("statusProfessor", StatusProfessor.values());
+		
+		return mv;
+	}
+	
 }
