@@ -12,7 +12,6 @@ import javax.persistence.Id;
 
 import org.springframework.lang.NonNull;
 
-
 @Entity
 public class Professor {
 
@@ -27,6 +26,13 @@ public class Professor {
 
 	public Professor() {
 
+	}
+
+	public Professor(String nome, BigDecimal salario, StatusProfessor statusProfessor) {
+		super();
+		this.nome = nome;
+		this.salario = salario;
+		this.statusProfessor = statusProfessor;
 	}
 
 	public Long getId() {

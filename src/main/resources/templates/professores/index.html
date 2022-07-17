@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Professores</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Lista de Professores</h1>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Salário</th>
+							<th scope="col">Satus</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="professor : ${professores}">
+							<th class="col-1" scope="row" th:text="${professor.id}">1</th>
+							<td class="col-4" th:text="${professor.nome}">Nome</td>
+							<td class="col-2" th:text="${professor.salario}">Salário</td>
+							<td class="col-2" th:text="${professor.statusProfessor}">Status</td>
+							<td class="col-1"><a href="#">Detalhes</a></td>
+							<td class="col-1"><a href="#">Editar</a></td>
+							<td class="col-1"><a href="#">Deletar</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<a href="#">Novo Professor</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+</body>
+
+
+</html>
