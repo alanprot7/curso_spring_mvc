@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.homeoffice.registroescolar.dto.RequisicaoNovoProfessor;
 import br.com.homeoffice.registroescolar.models.Professor;
 import br.com.homeoffice.registroescolar.models.StatusProfessor;
 import br.com.homeoffice.registroescolar.repositories.ProfessorRepository;
@@ -39,6 +41,15 @@ public class ProfessorController {
 		mv.addObject("statusProfessor", StatusProfessor.values());
 		
 		return mv;
+	}
+	
+	@PostMapping("/professores")
+	public String create(RequisicaoNovoProfessor requisicao) {
+		
+		Professor professor = requisicao.toProfessor();
+		this.professorRepository.save(professor);
+		
+		return "redirect:/professores";
 	}
 	
 }
