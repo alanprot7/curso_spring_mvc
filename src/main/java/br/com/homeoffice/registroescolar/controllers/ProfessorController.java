@@ -2,8 +2,11 @@ package br.com.homeoffice.registroescolar.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,23 +36,37 @@ public class ProfessorController {
 		return mv;
 	}
 
-	@GetMapping("/professor/new")
-	public ModelAndView novo() {
+	@GetMapping("/professores/new")
+	public ModelAndView novo(RequisicaoNovoProfessor requisicao) {
 		
 		ModelAndView mv = new ModelAndView("professores/new");
 		
-		mv.addObject("statusProfessor", StatusProfessor.values());
+		mv.addObject("listaStatusProfessor", StatusProfessor.values());
 		
 		return mv;
 	}
 	
 	@PostMapping("/professores")
-	public String create(RequisicaoNovoProfessor requisicao) {
+	public ModelAndView create(@Valid RequisicaoNovoProfessor requisicao, BindingResult bindingResult) {
 		
-		Professor professor = requisicao.toProfessor();
-		this.professorRepository.save(professor);
+		if(bindingResult.hasErrors()) {
 		
-		return "redirect:/professores";
+			System.out.println("*******  TEM ERROS  **********");
+			
+			ModelAndView mv = new ModelAndView("professores/new"); 
+			mv.addObject("listaStatusProfessor", StatusProfessor.values());
+			
+			return mv;
+		
+		}else {
+			
+			Professor professor = requisicao.toProfessor();
+			this.professorRepository.save(professor);
+			
+			return new ModelAndView("redirect:/professores");
+		
+		}
+
 	}
 	
 }

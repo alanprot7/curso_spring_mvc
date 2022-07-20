@@ -2,12 +2,20 @@ package br.com.homeoffice.registroescolar.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import br.com.homeoffice.registroescolar.models.Professor;
 import br.com.homeoffice.registroescolar.models.StatusProfessor;
 
 public class RequisicaoNovoProfessor {
 
+	@NotBlank
+	@NotNull
 	private String nome;
+	@NotNull
+	@DecimalMin("0.0")
 	private BigDecimal salario;
 	private StatusProfessor statusProfessor;
 
