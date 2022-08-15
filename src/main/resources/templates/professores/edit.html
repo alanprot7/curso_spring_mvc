@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos :: head('Novo Professor')}"></head>
+<head th:replace="~{fragmentos :: head('Editar Professor #' + ${professorId})}"></head>
 
 <body>
 	
-	<header th:replace="~{fragmentos :: header('Novo Professor')}"></header>
+	<header th:replace="~{fragmentos :: header('Editar Professor #' + ${professorId})}"></header>
 	
 		<div class="container">
 			<div class="row">

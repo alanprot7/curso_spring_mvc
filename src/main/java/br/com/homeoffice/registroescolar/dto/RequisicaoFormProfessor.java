@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import br.com.homeoffice.registroescolar.models.Professor;
 import br.com.homeoffice.registroescolar.models.StatusProfessor;
 
-public class RequisicaoNovoProfessor {
+public class RequisicaoFormProfessor {
 
 	@NotBlank
 	@NotNull
@@ -52,6 +52,13 @@ public class RequisicaoNovoProfessor {
 		
 		return professor;
 	}
+	
+	public void fromProfessor(Professor professor) {
+		this.nome = professor.getNome();
+		this.salario = professor.getSalario();
+		this.statusProfessor = professor.getStatusProfessor();
+	}
+	
 
 	@Override
 	public String toString() {
