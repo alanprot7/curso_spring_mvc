@@ -53,6 +53,13 @@ public class RequisicaoFormProfessor {
 		return professor;
 	}
 	
+	public Professor updProfessor(Professor professor) {
+		professor.setNome(this.nome);
+		professor.setSalario(this.salario);
+		professor.setStatusProfessor(this.statusProfessor);
+		return professor;
+	}
+	
 	public void fromProfessor(Professor professor) {
 		this.nome = professor.getNome();
 		this.salario = professor.getSalario();

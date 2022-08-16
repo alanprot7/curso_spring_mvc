@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -120,6 +121,54 @@ public class ProfessorController {
 
 		}
 
+	}
+	
+	
+	@PostMapping("/{id}")
+	public ModelAndView update(@PathVariable Long id, @Valid RequisicaoFormProfessor requisicao, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			
+			ModelAndView mv = new ModelAndView("professores/edit");
+			mv.addObject("professorId", id);
+			mv.addObject("listaStatusProfessor", StatusProfessor.values());
+			
+			return mv;
+		
+		}else {
+			
+			Optional<Professor> optional = this.professorRepository.findById(id);
+			
+			if(optional.isPresent()) {
+
+				Professor professor  = requisicao.updProfessor(optional.get());
+				this.professorRepository.save(professor);
+				return new ModelAndView("redirect:/professores/" + professor.getId());
+				
+			}
+			else {
+				
+				System.out.println("$$$$$$$ NÃO ACHOU O PROFESSOR ID " + id + " $$$$$$$");
+				return new ModelAndView("redirect:/professores");
+
+			}
+
+		}
+	}
+	
+	@GetMapping("/{id}/delete")
+	public String delete(@PathVariable Long id) {
+		
+		try {
+			this.professorRepository.deleteById(id);
+			return "redirect:/professores";
+		}catch (EmptyResultDataAccessException e) {
+			System.out.println(e.getMessage());
+			return "redirect:/professores";
+		}
+		
+		
+		
 	}
 	
 }
